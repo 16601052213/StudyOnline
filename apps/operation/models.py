@@ -31,6 +31,9 @@ class CourseComments(models.Model):
         verbose_name = u"课程评论"
         verbose_name_plural = verbose_name
 
+    # def __str__(self):
+    #     return self.user
+
 
 class UserFavorite(models.Model):
     user = models.ForeignKey(UserProfile, verbose_name=u"用户")
@@ -41,6 +44,9 @@ class UserFavorite(models.Model):
     class Meta:
         verbose_name = u"用户收藏"
         verbose_name_plural = verbose_name
+
+        # def __str__(self):
+        #     return self.user
 
 
 class UserMessage(models.Model):
@@ -62,3 +68,6 @@ class UserCourse(models.Model):
     class Meta:
         verbose_name = u"用户课程"
         verbose_name_plural = verbose_name
+
+    # def __str__(self):
+    #     return self.user
