@@ -13,6 +13,12 @@ class BaseSetting(object):
     use_bootswatch = True
 
 
+class GlobalSettings(object):
+    site_title = "真会学后台管理系统"
+    site_footer = "真会学在线网课"
+    menu_style = "accordion"
+
+
 class EmailVerifyRecordAdmin(object):
     list_display = ['code', 'email', 'send_type', 'send_time']
     search_fields = ['code', 'email', 'send_type']
@@ -28,3 +34,4 @@ class BannerAdmin(object):
 xadmin.site.register(EmailVerifyRecord, EmailVerifyRecordAdmin)
 xadmin.site.register(Banner, BannerAdmin)
 xadmin.site.register(views.BaseAdminView, BaseSetting)
+xadmin.site.register(views.CommAdminView, GlobalSettings)
