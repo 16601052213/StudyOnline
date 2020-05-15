@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.core.paginator import PageNotAnInteger
 from django.shortcuts import render
-
-# Create your views here.
 from django.views.generic import View
 from pure_pagination import Paginator
+from django.http import HttpResponse
 
 from organization.models import CourseOrg, CityDict
+from .form import UserAskForm
 
 
 class OrgView(View):
@@ -32,6 +32,7 @@ class OrgView(View):
             # 数据库查询通过机构类别字段进行筛选
             all_orgs = all_orgs.filter(category=category)
         # 统计筛选结束后all_orgs的数量
+
         org_nums = all_orgs.count()
         # 学习人数和课程排序
         sort = request.GET.get('sort', "")
@@ -59,3 +60,21 @@ class OrgView(View):
             "hot_orgs": hot_orgs,
             "sort": sort,
         })
+
+
+class AddUserAskView(View):
+    """
+    用户添加咨询
+    """
+    def post(self, request):
+        userask_form = UserAskForm(request.POST)
+        if userask_form.is_valid():
+            # 保存到数据库
+            userask_form = userask_form.save(commit=True)
+            return HttpResponse('{"status":"success"}', content_type='application/json')
+        else:
+            return HttpResponse('{"status":"fail", "msg":"添加出错"}',
+                                content_type='application/json')
+
+
+
