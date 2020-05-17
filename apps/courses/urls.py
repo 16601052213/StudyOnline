@@ -9,4 +9,7 @@ from courses.views import CourseListView
 urlpatterns = [
     # 课程列表页
     url(r'^list/$', CourseListView.as_view(), name="course_list"),
+    # 课程详情页
+    url(r'^detail/(?P<course_id>\d+)/$', CourseListView.as_view(), name="course_list"),
+
 ]
