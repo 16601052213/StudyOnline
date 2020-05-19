@@ -68,12 +68,16 @@ class Lesson(models.Model):
 class Video(models.Model):
     lesson = models.ForeignKey(Lesson, verbose_name=u"章节")
     name = models.CharField(max_length=100, verbose_name=u"视频名")
+    learn_times = models.IntegerField(default=0, verbose_name=u"学习时长(分)")
     url = models.CharField(max_length=200, verbose_name=u"访问地址", default="")
     create_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
 
     class Meta:
         verbose_name = u"视频"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
 
 
 class CourseResource(models.Model):
@@ -85,3 +89,6 @@ class CourseResource(models.Model):
     class Meta:
         verbose_name = u"课程资源"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
