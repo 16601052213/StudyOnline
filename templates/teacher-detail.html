@@ -114,38 +114,23 @@
                 <div class="butler_list_box">
                     <div class="right layout">
                         <div class="head">讲师排行榜</div>
-
-                        <dl class="des">
+                        {% for teacher_order in teachers_order %}
+                            <dl class="des">
                             <span class="num fl">1</span>
                             <a href="/org/teacher/detail/1/">
                                 <dt>
-                                    <img width="50" height="50" class="scrollLoading" src="../media/teacher/2016/11/aobama_CXWwMef.png"/>
+                                    <img width="50" height="50" class="scrollLoading" src="{{ MEDIA_URL }}{{ teacher_order.image }}"/>
                                 </dt>
                             </a>
                             <dd>
-                                <a href="/org/teacher/detail/1/">
-                                    <h1 title="bobby">bobby</h1>
+                                <a href="{% url 'org:teacher_detail' teacher.id %}">
+                                    <h1 title="teacher_name">{{ teacher_order.name }}</h1>
                                 </a>
-                                <p>工作年限：<span>5年</span></p>
+                                <p>工作年限：<span>{{ teacher_order.work_years }}年</span></p>
                             </dd>
                         </dl>
 
-                        <dl class="des">
-                            <span class="num fl">1</span>
-                            <a href="/org/teacher/detail/2/">
-                                <dt>
-                                    <img width="50" height="50" class="scrollLoading" src="../media/teacher/2016/11/aobama.png"/>
-                                </dt>
-                            </a>
-                            <dd>
-                                <a href="/org/teacher/detail/2/">
-                                    <h1 title="还是bobby">还是bobby</h1>
-                                </a>
-                                <p>工作年限：<span>5年</span></p>
-                            </dd>
-                        </dl>
-
-
+                        {% endfor %}
                     </div>
                 </div>
             </div>
