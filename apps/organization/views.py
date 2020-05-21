@@ -5,8 +5,9 @@ from django.views.generic import View
 from pure_pagination import Paginator
 from django.http import HttpResponse
 
+from courses.models import Course
 from operation.models import UserFavorite
-from organization.models import CourseOrg, CityDict
+from organization.models import CourseOrg, CityDict, Teacher
 from .form import UserAskForm
 
 
@@ -206,3 +207,47 @@ class AddFavViwe(View):
             else:
                 return HttpResponse('{"status":"fail", "msg":"收藏出错"}',
                                     content_type='application/json')
+
+
+class TeacherListView(View):
+    """
+    课程讲师列表页
+    """
+    def get(self, request):
+        all_teachers = Teacher.objects.all()
+        teachers_order = Teacher.objects.all().order_by("-click_nums")[:5]
+        teacher_nums = all_teachers.count()
+        # 人气排序
+        sort = request.GET.get('sort', "")
+        if sort:
+            if sort == "hot":
+                all_teachers = all_teachers.order_by("-click_nums")
+        # 对课程机构进行分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(all_teachers, 3, request=request)
+
+        orgs = p.page(page)
+        return render(request, "teachers-list.html", {
+            "all_teachers": orgs,
+            "teachers_order": teachers_order,
+            "sort": sort,
+            "teacher_nums": teacher_nums
+        })
+
+
+class TeacherDetailView(View):
+    def get(self, request, teacher_id):
+        teacher = Teacher.objects.get(id=int(teacher_id))
+        all_courses = Course.objects.filter(teacher=teacher)
+        # 讲师排行
+        teachers_order = Teacher.objects.all().order_by("-click_nums")[:5]
+        return render(request, "teacher-detail.html", {
+            "teacher": teacher,
+            "all_courses": all_courses,
+            "teachers_order": teachers_order,
+
+        })

@@ -42,4 +42,5 @@ urlpatterns = [
     # 课程相关url配置
     url(r'^course/', include('courses.urls', namespace="course")),
 
+
 ]

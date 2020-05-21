@@ -17,5 +17,4 @@ urlpatterns = [
     url(r'^comment/(?P<course_id>\d+)/$', CommentsView.as_view(), name="course_comments"),
     # 添加课程评论
     url(r'^add_comment/$', AddComentsView.as_view(), name="add_comment"),
-
 ]
