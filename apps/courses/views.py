@@ -1,4 +1,5 @@
 from django.core.paginator import PageNotAnInteger
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import View
@@ -17,6 +18,11 @@ class CourseListView(View):
         all_courses = Course.objects.all().order_by("-create_time")
         # 热门推荐
         hot_courses = Course.objects.all().order_by("-click_nums")[:3]
+        # 机构搜索
+        keywords = request.GET.get('keywords', "")
+        if keywords:
+            all_courses = all_courses.filter(Q(name__icontains=keywords) | Q(desc__icontains=keywords) |
+                                             Q(category__icontains=keywords))
         # 学习人数和课程排序
         sort = request.GET.get('sort', "")
         if sort:
