@@ -46,7 +46,7 @@
                                 </dl>
                                 <div class="btn">
 	                                <a class="personcenter fl" href="{% url 'users:user_info' %}">进入个人中心</a>
-{#	                                <a class="fr" href="{% url 'logout' %}">退出</a>#}
+	                                <a class="fr" href="{% url 'logout' %}">退出</a>
                                 </div>
                             </div>
                         </div>
@@ -64,8 +64,8 @@
 
     <div class="middle">
         <div class="wp">
-            <a href="index.html"><img class="fl" src="{% static 'images/logo2.png' %}"/></a>
-            <h1>我的慕学网</h1>
+            <a href="{% url 'index' %}"><img class="fl" src="{% static 'images/logo2.png' %}"/></a>
+            <h1>我的真会学网</h1>
         </div>
     </div>
 			</div>
