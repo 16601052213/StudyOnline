@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'zhuhai'
 __date__ = '2020/5/7 20:19'
+
 import xadmin
 from organization.models import CityDict, CourseOrg, Teacher
 
@@ -15,6 +16,7 @@ class CourseOrgAdmin(object):
     list_display = ['name', 'desc', 'click_nums', 'fav_nums', 'address', 'city', 'create_time']
     search_fields = ['name', 'desc', 'click_nums', 'fav_nums', 'address', 'city']
     list_filter = ['name', 'desc', 'click_nums', 'fav_nums', 'address', 'city', 'create_time']
+    relfield_style = 'fk-ajax'
 
 
 class TeacherAdmin(object):

@@ -3,7 +3,7 @@ __author__ = 'zhuhai'
 __date__ = '2020/5/7 18:18'
 
 import xadmin
-from users.models import EmailVerifyRecord, Banner
+from users.models import EmailVerifyRecord, Banner, UserProfile
 
 from xadmin import views
 
@@ -23,6 +23,7 @@ class EmailVerifyRecordAdmin(object):
     list_display = ['code', 'email', 'send_type', 'send_time']
     search_fields = ['code', 'email', 'send_type']
     list_filter = ['code', 'email', 'send_type', 'send_time']
+    model_icon = 'fa fa-address-book-o'
 
 
 class BannerAdmin(object):

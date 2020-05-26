@@ -35,6 +35,7 @@ class Course(models.Model):
     def get_zj_nums(self):
         # 获取课程章节数
         return self.lesson_set.all().count()
+    get_zj_nums.short_description = "章节数"
 
     def get_learn_users(self):
         # 取出前五个学习用户
@@ -93,3 +94,10 @@ class CourseResource(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class BannerCousrse(Course):
+    class Meta:
+        verbose_name = "轮播课程"
+        verbose_name_plural = verbose_name
+        proxy = True
